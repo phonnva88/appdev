@@ -1,0 +1,16 @@
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.Form1.resources
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.csproj.GenerateResource.cache
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.AssemblyInfoInputs.cache
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.AssemblyInfo.cs
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.csproj.CoreCompileInputs.cache
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\bin\Debug\net10.0-windows\appdevcw.exe
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\bin\Debug\net10.0-windows\appdevcw.deps.json
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\bin\Debug\net10.0-windows\appdevcw.runtimeconfig.json
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\bin\Debug\net10.0-windows\appdevcw.dll
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\bin\Debug\net10.0-windows\appdevcw.pdb
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.dll
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\refint\appdevcw.dll
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.pdb
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\appdevcw.genruntimeconfig.cache
+C:\Users\phonn\OneDrive\Desktop\appdevcw\appdevcw\obj\Debug\net10.0-windows\ref\appdevcw.dll
