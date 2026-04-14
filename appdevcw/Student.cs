@@ -6,12 +6,12 @@ namespace appdevcw
 {
 	internal class Student : Person
 	{
-		public List<string> Subjects;
+		public List<string> Subjects { get; set; }
 
 		public Student(string name, string phone, string email, List<string> subjects)
 			: base(name, phone, email, "Student")
 		{
-			Subjects = subjects;
+			Subjects = new List<string>(subjects);
 		}
 	}
 }

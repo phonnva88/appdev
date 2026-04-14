@@ -6,11 +6,11 @@ namespace appdevcw
 {
 	internal class Admin : Person
 	{
-		public int Salary;
-		public string EmploymentType;
-		public int WorkingHours;
+		public decimal Salary { get; set; }
+		public string EmploymentType { get; set; }
+		public int WorkingHours { get; set; }
 
-		public Admin(string name, string phone, string email, int salary, string type, int hours)
+		public Admin(string name, string phone, string email, decimal salary, string type, int hours)
 			: base(name, phone, email, "Admin")
 		{
 			Salary = salary;

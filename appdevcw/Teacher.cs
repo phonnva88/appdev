@@ -6,11 +6,11 @@ namespace appdevcw
 {
 	internal class Teacher : Person
 	{
-		public int Salary;
-		public string Subject1;
-		public string Subject2;
+		public decimal Salary { get; set; }
+		public string Subject1 { get; set; }
+		public string Subject2 { get; set; }
 
-		public Teacher(string name, string phone, string email, int salary, string s1, string s2)
+		public Teacher(string name, string phone, string email, decimal salary, string s1, string s2)
 			: base(name, phone, email, "Teacher")
 		{
 			Salary = salary;

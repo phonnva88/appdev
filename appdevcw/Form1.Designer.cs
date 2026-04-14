@@ -27,24 +27,21 @@
 		///  the contents of this method with the code editor.
 		/// </summary>
 		private System.Windows.Forms.TextBox tbName;
-		private System.Windows.Forms.TextBox tbPhone;
+		private System.Windows.Forms.TextBox tbTelephone;
 		private System.Windows.Forms.TextBox tbSub1;
 		private System.Windows.Forms.TextBox tbSub2;
 		private void InitializeComponent()
 		{
 			cbRole = new ComboBox();
 			tbName = new TextBox();
-			tbPhone = new TextBox();
+			tbTelephone = new TextBox();
 			tbEmail = new TextBox();
 			btnAdd = new Button();
 			btnView = new Button();
 			btnEdit = new Button();
 			btnDelete = new Button();
 			dataGridView1 = new DataGridView();
-			Column1 = new DataGridViewTextBoxColumn();
-			Column2 = new DataGridViewTextBoxColumn();
-			Column3 = new DataGridViewTextBoxColumn();
-			Column4 = new DataGridViewTextBoxColumn();
+			no = new DataGridViewTextBoxColumn();
 			tbSalary = new TextBox();
 			tbSub1 = new TextBox();
 			tbSub2 = new TextBox();
@@ -67,12 +64,42 @@
 			label3 = new Label();
 			label2 = new Label();
 			tabPage2 = new TabPage();
+			panelEdit = new Panel();
+			btnCancel = new Button();
+			panel3 = new Panel();
+			tbEditSub2 = new TextBox();
+			label18 = new Label();
+			label19 = new Label();
+			tbEditSub1 = new TextBox();
+			btnSave = new Button();
+			label11 = new Label();
+			tbEditSalary = new TextBox();
+			panel1 = new Panel();
+			tbEditSub3 = new TextBox();
+			label4 = new Label();
+			panel2 = new Panel();
+			cbEditType = new ComboBox();
+			label12 = new Label();
+			tbEditHours = new TextBox();
+			label13 = new Label();
+			tbEditPhone = new TextBox();
+			tbEditEmail = new TextBox();
+			label15 = new Label();
+			label16 = new Label();
+			tbEditName = new TextBox();
+			label17 = new Label();
+			cbViewRole = new ComboBox();
 			((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
 			tabControl1.SuspendLayout();
 			tabPage1.SuspendLayout();
 			panelStudent.SuspendLayout();
 			panelAdmin.SuspendLayout();
 			panelTeacher.SuspendLayout();
+			tabPage2.SuspendLayout();
+			panelEdit.SuspendLayout();
+			panel3.SuspendLayout();
+			panel1.SuspendLayout();
+			panel2.SuspendLayout();
 			SuspendLayout();
 			// 
 			// cbRole
@@ -92,12 +119,12 @@
 			tbName.Size = new Size(200, 39);
 			tbName.TabIndex = 1;
 			// 
-			// tbPhone
+			// tbTelephone
 			// 
-			tbPhone.Location = new Point(250, 112);
-			tbPhone.Name = "tbPhone";
-			tbPhone.Size = new Size(200, 39);
-			tbPhone.TabIndex = 2;
+			tbTelephone.Location = new Point(250, 112);
+			tbTelephone.Name = "tbTelephone";
+			tbTelephone.Size = new Size(200, 39);
+			tbTelephone.TabIndex = 2;
 			// 
 			// tbEmail
 			// 
@@ -118,71 +145,52 @@
 			// 
 			// btnView
 			// 
-			btnView.Location = new Point(1711, 460);
+			btnView.Location = new Point(46, 48);
 			btnView.Name = "btnView";
 			btnView.Size = new Size(150, 46);
 			btnView.TabIndex = 5;
-			btnView.Text = "button2";
+			btnView.Text = "View";
 			btnView.UseVisualStyleBackColor = true;
 			btnView.Click += btnView_Click;
 			// 
 			// btnEdit
 			// 
-			btnEdit.Location = new Point(1890, 460);
+			btnEdit.Location = new Point(219, 48);
 			btnEdit.Name = "btnEdit";
 			btnEdit.Size = new Size(150, 46);
 			btnEdit.TabIndex = 6;
-			btnEdit.Text = "button3";
+			btnEdit.Text = "Edit";
 			btnEdit.UseVisualStyleBackColor = true;
 			btnEdit.Click += btnEdit_Click;
 			// 
 			// btnDelete
 			// 
-			btnDelete.Location = new Point(2075, 460);
+			btnDelete.Location = new Point(393, 48);
 			btnDelete.Name = "btnDelete";
 			btnDelete.Size = new Size(150, 46);
 			btnDelete.TabIndex = 7;
-			btnDelete.Text = "button4";
+			btnDelete.Text = "Delete";
 			btnDelete.UseVisualStyleBackColor = true;
 			btnDelete.Click += btnDelete_Click;
 			// 
 			// dataGridView1
 			// 
 			dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
-			dataGridView1.Location = new Point(1536, 526);
+			dataGridView1.Columns.AddRange(new DataGridViewColumn[] { no });
+			dataGridView1.Location = new Point(22, 110);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.RowHeadersWidth = 82;
-			dataGridView1.Size = new Size(895, 300);
+			dataGridView1.Size = new Size(2263, 599);
 			dataGridView1.TabIndex = 8;
+			dataGridView1.CellClick += dataGridView1_CellClick;
+			dataGridView1.CellContentClick += dataGridView1_CellContentClick;
 			// 
-			// Column1
+			// no
 			// 
-			Column1.HeaderText = "Name";
-			Column1.MinimumWidth = 10;
-			Column1.Name = "Column1";
-			Column1.Width = 200;
-			// 
-			// Column2
-			// 
-			Column2.HeaderText = "Phone";
-			Column2.MinimumWidth = 10;
-			Column2.Name = "Column2";
-			Column2.Width = 200;
-			// 
-			// Column3
-			// 
-			Column3.HeaderText = "Email";
-			Column3.MinimumWidth = 10;
-			Column3.Name = "Column3";
-			Column3.Width = 200;
-			// 
-			// Column4
-			// 
-			Column4.HeaderText = "Role";
-			Column4.MinimumWidth = 10;
-			Column4.Name = "Column4";
-			Column4.Width = 200;
+			no.HeaderText = "no.";
+			no.MinimumWidth = 10;
+			no.Name = "no";
+			no.Width = 200;
 			// 
 			// tbSalary
 			// 
@@ -226,7 +234,7 @@
 			tabControl1.Location = new Point(43, 41);
 			tabControl1.Name = "tabControl1";
 			tabControl1.SelectedIndex = 0;
-			tabControl1.Size = new Size(1223, 785);
+			tabControl1.Size = new Size(2348, 969);
 			tabControl1.TabIndex = 15;
 			// 
 			// tabPage1
@@ -236,7 +244,7 @@
 			tabPage1.Controls.Add(panelStudent);
 			tabPage1.Controls.Add(panelAdmin);
 			tabPage1.Controls.Add(panelTeacher);
-			tabPage1.Controls.Add(tbPhone);
+			tabPage1.Controls.Add(tbTelephone);
 			tabPage1.Controls.Add(btnAdd);
 			tabPage1.Controls.Add(tbEmail);
 			tabPage1.Controls.Add(label6);
@@ -248,7 +256,7 @@
 			tabPage1.Location = new Point(8, 46);
 			tabPage1.Name = "tabPage1";
 			tabPage1.Padding = new Padding(3);
-			tabPage1.Size = new Size(1207, 731);
+			tabPage1.Size = new Size(2332, 915);
 			tabPage1.TabIndex = 0;
 			tabPage1.Text = "Add data";
 			tabPage1.UseVisualStyleBackColor = true;
@@ -266,7 +274,7 @@
 			// 
 			panelStudent.Controls.Add(tbSub3);
 			panelStudent.Controls.Add(label9);
-			panelStudent.Location = new Point(440, 392);
+			panelStudent.Location = new Point(455, 331);
 			panelStudent.Name = "panelStudent";
 			panelStudent.Size = new Size(400, 200);
 			panelStudent.TabIndex = 23;
@@ -286,7 +294,7 @@
 			panelAdmin.Controls.Add(label10);
 			panelAdmin.Controls.Add(tbHours);
 			panelAdmin.Controls.Add(label5);
-			panelAdmin.Location = new Point(34, 331);
+			panelAdmin.Location = new Point(470, 115);
 			panelAdmin.Name = "panelAdmin";
 			panelAdmin.Size = new Size(400, 200);
 			panelAdmin.TabIndex = 22;
@@ -386,24 +394,254 @@
 			// 
 			// tabPage2
 			// 
+			tabPage2.Controls.Add(panelEdit);
+			tabPage2.Controls.Add(btnEdit);
+			tabPage2.Controls.Add(btnDelete);
+			tabPage2.Controls.Add(cbViewRole);
+			tabPage2.Controls.Add(dataGridView1);
+			tabPage2.Controls.Add(btnView);
 			tabPage2.Location = new Point(8, 46);
 			tabPage2.Name = "tabPage2";
 			tabPage2.Padding = new Padding(3);
-			tabPage2.Size = new Size(1207, 731);
+			tabPage2.Size = new Size(2332, 915);
 			tabPage2.TabIndex = 1;
 			tabPage2.Text = "View data";
 			tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// panelEdit
+			// 
+			panelEdit.Controls.Add(btnCancel);
+			panelEdit.Controls.Add(panel3);
+			panelEdit.Controls.Add(btnSave);
+			panelEdit.Controls.Add(label11);
+			panelEdit.Controls.Add(tbEditSalary);
+			panelEdit.Controls.Add(panel1);
+			panelEdit.Controls.Add(panel2);
+			panelEdit.Controls.Add(tbEditPhone);
+			panelEdit.Controls.Add(tbEditEmail);
+			panelEdit.Controls.Add(label15);
+			panelEdit.Controls.Add(label16);
+			panelEdit.Controls.Add(tbEditName);
+			panelEdit.Controls.Add(label17);
+			panelEdit.Location = new Point(1339, 19);
+			panelEdit.Name = "panelEdit";
+			panelEdit.Size = new Size(971, 819);
+			panelEdit.TabIndex = 10;
+			panelEdit.Visible = false;
+			// 
+			// btnCancel
+			// 
+			btnCancel.Location = new Point(359, 728);
+			btnCancel.Name = "btnCancel";
+			btnCancel.Size = new Size(150, 46);
+			btnCancel.TabIndex = 38;
+			btnCancel.Text = "  ";
+			btnCancel.UseVisualStyleBackColor = true;
+			btnCancel.Click += btnCancel_Click;
+			// 
+			// panel3
+			// 
+			panel3.Controls.Add(tbEditSub2);
+			panel3.Controls.Add(label18);
+			panel3.Controls.Add(label19);
+			panel3.Controls.Add(tbEditSub1);
+			panel3.Location = new Point(134, 424);
+			panel3.Name = "panel3";
+			panel3.Size = new Size(400, 200);
+			panel3.TabIndex = 37;
+			// 
+			// tbEditSub2
+			// 
+			tbEditSub2.Location = new Point(137, 146);
+			tbEditSub2.Name = "tbEditSub2";
+			tbEditSub2.Size = new Size(200, 39);
+			tbEditSub2.TabIndex = 11;
+			// 
+			// label18
+			// 
+			label18.AutoSize = true;
+			label18.Location = new Point(18, 85);
+			label18.Name = "label18";
+			label18.Size = new Size(113, 32);
+			label18.TabIndex = 21;
+			label18.Text = "Subject 1";
+			// 
+			// label19
+			// 
+			label19.AutoSize = true;
+			label19.Location = new Point(18, 149);
+			label19.Name = "label19";
+			label19.Size = new Size(113, 32);
+			label19.TabIndex = 22;
+			label19.Text = "Subject 2";
+			// 
+			// tbEditSub1
+			// 
+			tbEditSub1.Location = new Point(137, 85);
+			tbEditSub1.Name = "tbEditSub1";
+			tbEditSub1.Size = new Size(200, 39);
+			tbEditSub1.TabIndex = 10;
+			// 
+			// btnSave
+			// 
+			btnSave.Location = new Point(553, 728);
+			btnSave.Name = "btnSave";
+			btnSave.Size = new Size(150, 46);
+			btnSave.TabIndex = 28;
+			btnSave.Text = "Save";
+			btnSave.UseVisualStyleBackColor = true;
+			btnSave.Click += btnSave_Click;
+			// 
+			// label11
+			// 
+			label11.AutoSize = true;
+			label11.Location = new Point(183, 648);
+			label11.Name = "label11";
+			label11.Size = new Size(77, 32);
+			label11.TabIndex = 33;
+			label11.Text = "Salary";
+			// 
+			// tbEditSalary
+			// 
+			tbEditSalary.Location = new Point(285, 648);
+			tbEditSalary.Name = "tbEditSalary";
+			tbEditSalary.Size = new Size(200, 39);
+			tbEditSalary.TabIndex = 29;
+			// 
+			// panel1
+			// 
+			panel1.Controls.Add(tbEditSub3);
+			panel1.Controls.Add(label4);
+			panel1.Location = new Point(553, 480);
+			panel1.Name = "panel1";
+			panel1.Size = new Size(400, 200);
+			panel1.TabIndex = 36;
+			// 
+			// tbEditSub3
+			// 
+			tbEditSub3.Location = new Point(144, 27);
+			tbEditSub3.Name = "tbEditSub3";
+			tbEditSub3.Size = new Size(200, 39);
+			tbEditSub3.TabIndex = 14;
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.Location = new Point(25, 34);
+			label4.Name = "label4";
+			label4.Size = new Size(113, 32);
+			label4.TabIndex = 23;
+			label4.Text = "Subject 3";
+			// 
+			// panel2
+			// 
+			panel2.Controls.Add(cbEditType);
+			panel2.Controls.Add(label12);
+			panel2.Controls.Add(tbEditHours);
+			panel2.Controls.Add(label13);
+			panel2.Location = new Point(553, 260);
+			panel2.Name = "panel2";
+			panel2.Size = new Size(400, 200);
+			panel2.TabIndex = 35;
+			// 
+			// cbEditType
+			// 
+			cbEditType.FormattingEnabled = true;
+			cbEditType.Items.AddRange(new object[] { "Full-Time", "Part-Time" });
+			cbEditType.Location = new Point(127, 14);
+			cbEditType.Name = "cbEditType";
+			cbEditType.Size = new Size(242, 40);
+			cbEditType.TabIndex = 24;
+			// 
+			// label12
+			// 
+			label12.AutoSize = true;
+			label12.Location = new Point(49, 80);
+			label12.Name = "label12";
+			label12.Size = new Size(77, 32);
+			label12.TabIndex = 24;
+			label12.Text = "Hours";
+			// 
+			// tbEditHours
+			// 
+			tbEditHours.Location = new Point(151, 80);
+			tbEditHours.Name = "tbEditHours";
+			tbEditHours.Size = new Size(200, 39);
+			tbEditHours.TabIndex = 13;
+			// 
+			// label13
+			// 
+			label13.AutoSize = true;
+			label13.Location = new Point(49, 14);
+			label13.Name = "label13";
+			label13.Size = new Size(65, 32);
+			label13.TabIndex = 19;
+			label13.Text = "Type";
+			// 
+			// tbEditPhone
+			// 
+			tbEditPhone.Location = new Point(363, 200);
+			tbEditPhone.Name = "tbEditPhone";
+			tbEditPhone.Size = new Size(200, 39);
+			tbEditPhone.TabIndex = 26;
+			// 
+			// tbEditEmail
+			// 
+			tbEditEmail.Location = new Point(261, 277);
+			tbEditEmail.Name = "tbEditEmail";
+			tbEditEmail.Size = new Size(200, 39);
+			tbEditEmail.TabIndex = 27;
+			// 
+			// label15
+			// 
+			label15.AutoSize = true;
+			label15.Location = new Point(169, 131);
+			label15.Name = "label15";
+			label15.Size = new Size(78, 32);
+			label15.TabIndex = 30;
+			label15.Text = "Name";
+			// 
+			// label16
+			// 
+			label16.AutoSize = true;
+			label16.Location = new Point(169, 277);
+			label16.Name = "label16";
+			label16.Size = new Size(71, 32);
+			label16.TabIndex = 32;
+			label16.Text = "Email";
+			// 
+			// tbEditName
+			// 
+			tbEditName.Location = new Point(271, 128);
+			tbEditName.Name = "tbEditName";
+			tbEditName.Size = new Size(200, 39);
+			tbEditName.TabIndex = 25;
+			tbEditName.TextChanged += tbEditName_TextChanged;
+			// 
+			// label17
+			// 
+			label17.AutoSize = true;
+			label17.Location = new Point(169, 203);
+			label17.Name = "label17";
+			label17.Size = new Size(177, 32);
+			label17.TabIndex = 31;
+			label17.Text = "Phone Number";
+			// 
+			// cbViewRole
+			// 
+			cbViewRole.FormattingEnabled = true;
+			cbViewRole.Items.AddRange(new object[] { "All", "Teacher", "Admin", "Student" });
+			cbViewRole.Location = new Point(967, 48);
+			cbViewRole.Name = "cbViewRole";
+			cbViewRole.Size = new Size(242, 40);
+			cbViewRole.TabIndex = 9;
 			// 
 			// Form1
 			// 
 			AutoScaleDimensions = new SizeF(13F, 32F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(2443, 852);
+			ClientSize = new Size(2443, 1022);
 			Controls.Add(tabControl1);
-			Controls.Add(dataGridView1);
-			Controls.Add(btnDelete);
-			Controls.Add(btnEdit);
-			Controls.Add(btnView);
 			Name = "Form1";
 			Text = "Form1";
 			Load += Form1_Load;
@@ -417,24 +655,27 @@
 			panelAdmin.PerformLayout();
 			panelTeacher.ResumeLayout(false);
 			panelTeacher.PerformLayout();
+			tabPage2.ResumeLayout(false);
+			panelEdit.ResumeLayout(false);
+			panelEdit.PerformLayout();
+			panel3.ResumeLayout(false);
+			panel3.PerformLayout();
+			panel1.ResumeLayout(false);
+			panel1.PerformLayout();
+			panel2.ResumeLayout(false);
+			panel2.PerformLayout();
 			ResumeLayout(false);
 		}
 
 		#endregion
 
 		private ComboBox cbRole;
-		private TextBox textBox1;
-		private TextBox textBox2;
 		private TextBox tbEmail;
 		private Button btnAdd;
 		private Button btnView;
 		private Button btnEdit;
 		private Button btnDelete;
 		private DataGridView dataGridView1;
-		private DataGridViewTextBoxColumn Column1;
-		private DataGridViewTextBoxColumn Column2;
-		private DataGridViewTextBoxColumn Column3;
-		private DataGridViewTextBoxColumn Column4;
 		private TextBox tbSalary;
 		private TextBox tbHours;
 		private TextBox tbSub3;
@@ -458,5 +699,31 @@
 		private Panel panelAdmin;
 		private Panel panelTeacher;
 		private ComboBox cbType;
+		private DataGridViewTextBoxColumn no;
+		private ComboBox cbViewRole;
+		private Panel panelEdit;
+		private Button btnCancel;
+		private Panel panel3;
+		private TextBox tbEditSub2;
+		private Label label18;
+		private Label label19;
+		private TextBox tbEditSub1;
+		private Button btnSave;
+		private Label label11;
+		private TextBox tbEditSalary;
+		private Panel panel1;
+		private TextBox tbEditSub3;
+		private Label label4;
+		private Panel panel2;
+		private ComboBox cbEditType;
+		private Label label12;
+		private TextBox tbEditHours;
+		private Label label13;
+		private Label label15;
+		private Label label16;
+		private Label label17;
+		private TextBox tbEditEmail;
+		private TextBox tbEditPhone;
+		private TextBox tbEditName;
 	}
 }

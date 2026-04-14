@@ -4,13 +4,12 @@ using System.Text;
 
 namespace appdevcw
 {
-	internal class Person
+	internal abstract class Person
 	{
-		public string Name;
-		public string Phone;
-		public string Email;
-		public string Role;
-
+		public string Name { get; set; }
+		public string Phone { get; set; }
+		public string Email { get; set; }
+		public string Role { get; set; } // cmt.Typo error
 		public Person(string name, string phone, string email, string role)
 		{
 			Name = name;
