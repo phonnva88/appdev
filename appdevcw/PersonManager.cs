@@ -70,7 +70,7 @@ namespace appdevcw
 			cmd.Parameters.Add("@phone", SqlDbType.VarChar).Value = a.Phone;
 			cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = a.Email;
 			cmd.Parameters.Add("@salary", SqlDbType.Decimal).Value = a.Salary;
-			cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = a.EmploymentType;
+			cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = a.EmploymentType.ToString();
 			cmd.Parameters.Add("@hours", SqlDbType.Int).Value = a.WorkingHours;
 
 			cmd.ExecuteNonQuery();
@@ -145,28 +145,28 @@ namespace appdevcw
 
 			return dt;
 		}
-		public DataTable ViewByRole(string role)
+		public DataTable ViewByRole(RoleType role)
 		{
 			using var conn = new SqlConnection(connStr);
 			conn.Open();
 
 			string query = "";
 
-			if (role == "teacher")
+			if (role == RoleType.Teacher)
 			{
 				query = @"SELECT t.teacherID AS id, t.name, t.telephone, t.email, t.salary, STRING_AGG(s.subjectname, ' | ') AS subjects, 'N/A' AS worktype, 0 AS workhours, 'teacher' AS role FROM Teacher t
 				LEFT JOIN TeacherSubject ts ON t.teacherID = ts.teacherID
 				LEFT JOIN Subject s ON ts.subjectID = s.subjectID
 				GROUP BY t.teacherID, t.name, t.telephone, t.email, t.salary";
 			}
-			else if (role == "student")
+			else if (role == RoleType.Student)
 			{
 				query = @"SELECT st.studentID AS id, st.name, st.telephone, st.email, 0 AS salary, STRING_AGG(s.subjectname, ' | ') AS subjects, 'N/A' AS worktype, 0 AS workhours, 'student' AS role FROM Student st
 					LEFT JOIN StudentSubject ss ON st.studentID = ss.studentID
 					LEFT JOIN Subject s ON ss.subjectID = s.subjectID
 					GROUP BY st.studentID, st.name, st.telephone, st.email";
 			}
-			else if (role == "admin")
+			else if (role == RoleType.Admin)
 			{
 				query = @"SELECT adminID AS id, name, telephone, email, salary, 'N/A' AS subjects, worktype, workhours, 'admin' AS role FROM Admin";
 			}
@@ -181,7 +181,7 @@ namespace appdevcw
 		}
 
 		// EDIT DATA FEATURE
-		public void UpdatePerson(int id, string role, Person p)
+		public void UpdatePerson(int id, RoleType role, Person p)
 		{
 			using var conn = new SqlConnection(connStr);
 			conn.Open();
@@ -190,7 +190,7 @@ namespace appdevcw
 
 			try
 			{
-				if (role == "teacher" && p is Teacher t)
+				if (role == RoleType.Teacher && p is Teacher t)
 				{
 					string query = @"UPDATE Teacher SET name=@name, telephone=@phone, email=@email, salary=@salary WHERE teacherID=@id";
 					using var cmd = new SqlCommand(query, conn, tran);
@@ -226,7 +226,7 @@ namespace appdevcw
 					}
 				}
 
-				else if (role == "student" && p is Student s)
+				else if (role == RoleType.Student && p is Student s)
 				{
 					string query = @"UPDATE Student SET name=@name, telephone=@phone, email=@email WHERE studentID=@id";
 					using var cmd = new SqlCommand(query, conn, tran);
@@ -259,7 +259,7 @@ namespace appdevcw
 					}
 				}
 
-				else if (role == "admin" && p is Admin a)
+				else if (role == RoleType.Admin && p is Admin a)
 				{
 					string query = @"UPDATE Admin SET name=@name, telephone=@phone, email=@email, salary=@salary, worktype=@type, workhours=@hours WHERE adminID=@id";
 					using var cmd = new SqlCommand(query, conn, tran);
@@ -268,8 +268,8 @@ namespace appdevcw
 					cmd.Parameters.Add("@phone", SqlDbType.VarChar).Value = a.Phone;
 					cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = a.Email;
 					cmd.Parameters.Add("@salary", SqlDbType.Decimal).Value = a.Salary;
-					cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = a.EmploymentType;
-					cmd.Parameters.Add("@hours", SqlDbType.VarChar).Value = a.WorkingHours;
+					cmd.Parameters.Add("@type", SqlDbType.VarChar).Value = a.EmploymentType.ToString();
+					cmd.Parameters.Add("@hours", SqlDbType.Int).Value = a.WorkingHours;
 					cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
 
 					cmd.ExecuteNonQuery();
@@ -285,7 +285,7 @@ namespace appdevcw
 		}
 
 		// DELETE DATA FEATURE
-		public void DeletePerson(int id, string role)
+		public void DeletePerson(int id, RoleType role)
 		{
 			using var conn = new SqlConnection(connStr);
 			conn.Open();
@@ -294,7 +294,7 @@ namespace appdevcw
 
 			try
 			{
-				if (role == "teacher")
+				if (role == RoleType.Teacher)
 				{
 					// delete subjects (no need to check)
 					using var cmd = new SqlCommand(
@@ -312,7 +312,7 @@ namespace appdevcw
 					if (rows == 0)
 						throw new Exception("Delete failed: Teacher not found.");
 				}
-				else if (role == "student")
+				else if (role == RoleType.Student)
 				{
 					using var cmd = new SqlCommand(
 						"DELETE FROM StudentSubject WHERE studentID = @id", conn, tran);
@@ -328,7 +328,7 @@ namespace appdevcw
 					if (rows == 0)
 						throw new Exception("Delete failed: Student not found.");
 				}
-				else if (role == "admin")
+				else if (role == RoleType.Admin)
 				{
 					using var cmd = new SqlCommand(
 						"DELETE FROM Admin WHERE adminID = @id", conn, tran);

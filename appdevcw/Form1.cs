@@ -47,6 +47,9 @@ namespace appdevcw
 
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 			dataGridView1.MultiSelect = false;
+
+			cbRole.DataSource = Enum.GetValues(typeof(RoleType));
+			cbViewRole.DataSource = Enum.GetValues(typeof(RoleType));
 		}
 		private bool ValidateInputs(Control control, string message)
 		{
@@ -78,19 +81,22 @@ namespace appdevcw
 				string name = tbName.Text.Trim();
 				string telephone = tbTelephone.Text.Trim();
 				string email = tbEmail.Text.Trim();
-				string role = cbRole.Text.Trim().ToLower();
+				if (!Enum.TryParse(cbRole.Text, out RoleType role))
+				{
+					MessageBox.Show("Invalid role!");
+					return;
+				}
 
 				// Validate required fields
 				if (string.IsNullOrEmpty(name) ||
 					string.IsNullOrEmpty(telephone) ||
-					string.IsNullOrEmpty(email) ||
-					string.IsNullOrEmpty(role))
+					string.IsNullOrEmpty(email))
 				{
 					MessageBox.Show("Please fill in all required fields!");
 					return;
 				}
 
-				if (role == "teacher")
+				if (role == RoleType.Teacher)
 				{
 					if (!ValidateInputs(tbSalary, "Please enter salary!")) return; // cmt.OOP
 					if (!decimal.TryParse(tbSalary.Text, out decimal salary)) // cmt.OOP
@@ -106,7 +112,7 @@ namespace appdevcw
 					manager.AddPerson(t);
 				}
 
-				else if (role == "admin")
+				else if (role == RoleType.Admin)
 				{
 					if (!ValidateInputs(tbSalary, "Please enter salary!")) return;
 					if (!decimal.TryParse(tbSalary.Text, out decimal salary))
@@ -123,11 +129,17 @@ namespace appdevcw
 						return;
 					}
 
-					Admin a = new Admin(name, telephone, email, salary, cbType.Text, hours);
+					if (!Enum.TryParse(cbType.Text.Trim(), out EmploymentType type))
+					{
+						MessageBox.Show("Invalid employment type!");
+						return;
+					}
+
+					Admin a = new Admin(name, telephone, email, salary, type, hours);
 					manager.AddPerson(a);
 				}
 
-				else if (role == "student")
+				else if (role == RoleType.Student)
 				{
 					if (!ValidateInputs(tbSub1, "Please enter subject 1!")) return;
 					if (!ValidateInputs(tbSub2, "Please enter subject 2!")) return;
@@ -164,20 +176,14 @@ namespace appdevcw
 		{
 			try
 			{
-				string role = cbViewRole.Text.Trim().ToLower(); // cmt.repeat with line 75
-
-				DataTable dt;
-
-				if (role == "all")
+				if (cbViewRole.Text == "All")
 				{
-					dt = manager.ViewAll();
+					dataGridView1.DataSource = manager.ViewAll();
 				}
-				else
+				else if (Enum.TryParse(cbViewRole.Text, out RoleType role))
 				{
-					dt = manager.ViewByRole(role);
+					dataGridView1.DataSource = manager.ViewByRole(role);
 				}
-
-				dataGridView1.DataSource = dt;
 			}
 			catch (Exception ex)
 			{
@@ -203,9 +209,9 @@ namespace appdevcw
 			tbEditPhone.Text = row.Cells["telephone"].Value?.ToString();
 			tbEditEmail.Text = row.Cells["email"].Value?.ToString();
 
-			string role = row.Cells["role"].Value?.ToString()?.Trim().ToLower() ?? "";
+			Enum.TryParse(row.Cells["role"].Value?.ToString(), out RoleType role);
 
-			if (role == "teacher")
+			if (role == RoleType.Teacher)
 			{
 				tbEditSalary.Text = row.Cells["salary"].Value?.ToString();
 
@@ -214,7 +220,7 @@ namespace appdevcw
 				if (parts.Length > 0) tbEditSub1.Text = parts[0]; // check to fit with required subject fields
 				if (parts.Length > 1) tbEditSub2.Text = parts[1];
 			}
-			else if (role == "student")
+			else if (role == RoleType.Student)
 			{
 				var parts = (row.Cells["subjects"].Value?.ToString() ?? "").Split('|').Select(x => x.Trim()).ToArray();
 
@@ -222,7 +228,7 @@ namespace appdevcw
 				if (parts.Length > 1) tbEditSub2.Text = parts[1];
 				if (parts.Length > 2) tbEditSub3.Text = parts[2];
 			}
-			else if (role == "admin")
+			else if (role == RoleType.Admin)
 			{
 				tbEditSalary.Text = row.Cells["salary"].Value?.ToString();
 				cbEditType.Text = row.Cells["worktype"].Value?.ToString();
@@ -249,7 +255,7 @@ namespace appdevcw
 
 			// Get ID + Role
 			int id = Convert.ToInt32(row.Cells["id"].Value);
-			string role = row.Cells["role"].Value?.ToString()?.ToLower() ?? "";
+			Enum.TryParse(row.Cells["role"].Value?.ToString(), out RoleType role);
 
 			// Confirm before delete
 			var confirm = MessageBox.Show($"Delete {role} with ID = {id}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -274,21 +280,22 @@ namespace appdevcw
 		}
 		private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			string role = cbRole.Text.Trim().ToLower();
+			if (!Enum.TryParse(cbRole.Text, out RoleType role))
+				return;
 
 			HideAllPanelsRole();
 
-			if (role == "teacher")
+			if (role == RoleType.Teacher)
 			{
 				ShowTbSalary();
 				panelTeacher.Visible = true;
 			}
-			else if (role == "admin")
+			else if (role == RoleType.Admin)
 			{
 				ShowTbSalary();
 				panelAdmin.Visible = true;
 			}
-			else if (role == "student")
+			else if (role == RoleType.Student)
 			{
 				panelTeacher.Visible = true;
 				panelStudent.Visible = true;
@@ -311,47 +318,7 @@ namespace appdevcw
 
 		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			//if (e.RowIndex < 0) return;
 
-			//var row = dataGridView1.Rows[e.RowIndex];
-
-			//// ✅ FIX: store selected ID
-			//selectedId = Convert.ToInt32(row.Cells["id"].Value);
-
-			//tbName.Text = row.Cells["name"].Value?.ToString();
-			//tbTelephone.Text = row.Cells["telephone"].Value?.ToString();
-			//tbEmail.Text = row.Cells["email"].Value?.ToString();
-
-			//string role = row.Cells["role"].Value?.ToString()?.ToLower();
-			//cbRole.Text = role;
-
-			//if (role == "teacher")
-			//{
-			//	tbSalary.Text = row.Cells["salary"].Value?.ToString();
-
-			//	string subjects = row.Cells["subjects"].Value?.ToString() ?? "";
-			//	var parts = subjects.Split('|')
-			//		.Select(x => x.Trim())
-			//		.ToArray();
-
-			//	if (parts.Length > 0) tbSub1.Text = parts[0].Trim();
-			//	if (parts.Length > 1) tbSub2.Text = parts[1].Trim();
-			//}
-			//else if (role == "student")
-			//{
-			//	string subjects = row.Cells["subjects"].Value?.ToString() ?? "";
-			//	var parts = subjects.Split('|');
-
-			//	if (parts.Length > 0) tbSub1.Text = parts[0].Trim();
-			//	if (parts.Length > 1) tbSub2.Text = parts[1].Trim();
-			//	if (parts.Length > 2) tbSub3.Text = parts[2].Trim();
-			//}
-			//else if (role == "admin")
-			//{
-			//	tbSalary.Text = row.Cells["salary"].Value?.ToString();
-			//	cbType.Text = row.Cells["worktype"].Value?.ToString();
-			//	tbHours.Text = row.Cells["workhours"].Value?.ToString();
-			//}
 		}
 
 		private void btnSave_Click(object sender, EventArgs e)
@@ -366,9 +333,9 @@ namespace appdevcw
 					return;
 				}
 
-				string role = row.Cells["role"].Value?.ToString()?.ToLower() ?? "";
+				Enum.TryParse(row.Cells["role"].Value?.ToString(), out RoleType role);
 
-				if (role == "teacher")
+				if (role == RoleType.Teacher)
 				{
 					if (!decimal.TryParse(tbEditSalary.Text, out decimal salary))
 					{
@@ -381,7 +348,7 @@ namespace appdevcw
 
 					manager.UpdatePerson(selectedId, role, t);
 				}
-				else if (role == "student")
+				else if (role == RoleType.Student)
 				{
 					var subjects = new List<string>();
 
@@ -396,7 +363,7 @@ namespace appdevcw
 
 					manager.UpdatePerson(selectedId, role, s);
 				}
-				else if (role == "admin")
+				else if (role == RoleType.Admin)
 				{
 					if (!decimal.TryParse(tbEditSalary.Text, out decimal salary))
 					{
@@ -410,7 +377,12 @@ namespace appdevcw
 						return;
 					}
 
-					Admin a = new Admin(tbEditName.Text, tbEditPhone.Text, tbEditEmail.Text, salary, cbEditType.Text, hours);
+					if (!Enum.TryParse(cbEditType.Text, out EmploymentType type))
+					{
+						MessageBox.Show("Invalid employment type!");
+						return;
+					}
+					Admin a = new Admin(tbEditName.Text, tbEditPhone.Text, tbEditEmail.Text, salary, type, hours);
 
 					manager.UpdatePerson(selectedId, role, a);
 				}

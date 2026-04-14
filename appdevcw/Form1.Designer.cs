@@ -302,7 +302,7 @@
 			// cbType
 			// 
 			cbType.FormattingEnabled = true;
-			cbType.Items.AddRange(new object[] { "Full-Time", "Part-Time" });
+			cbType.Items.AddRange(new object[] { "Full time", "Part time" });
 			cbType.Location = new Point(127, 14);
 			cbType.Name = "cbType";
 			cbType.Size = new Size(242, 40);

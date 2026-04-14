@@ -11,7 +11,7 @@ namespace appdevcw
 		public string Subject2 { get; set; }
 
 		public Teacher(string name, string phone, string email, decimal salary, string s1, string s2)
-			: base(name, phone, email, "Teacher")
+			: base(name, phone, email, RoleType.Teacher)
 		{
 			Salary = salary;
 			Subject1 = s1;
