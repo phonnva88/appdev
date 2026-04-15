@@ -43,7 +43,7 @@ namespace appdevcw
 			dataGridView1.DataBindingComplete += RowNumbers;
 			dataGridView1.Sorted += RowNumbers;
 
-			cbViewRole.SelectedIndex = 0;
+			//cbViewRole.SelectedIndex = 0;
 
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 			dataGridView1.MultiSelect = false;
