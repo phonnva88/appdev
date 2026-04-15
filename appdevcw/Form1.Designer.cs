@@ -105,7 +105,6 @@
 			// cbRole
 			// 
 			cbRole.FormattingEnabled = true;
-			cbRole.Items.AddRange(new object[] { "Teacher", "Admin", "Student" });
 			cbRole.Location = new Point(148, 263);
 			cbRole.Name = "cbRole";
 			cbRole.Size = new Size(242, 40);
@@ -302,7 +301,6 @@
 			// cbType
 			// 
 			cbType.FormattingEnabled = true;
-			cbType.Items.AddRange(new object[] { "Full time", "Part time" });
 			cbType.Location = new Point(127, 14);
 			cbType.Name = "cbType";
 			cbType.Size = new Size(242, 40);
@@ -547,7 +545,6 @@
 			// cbEditType
 			// 
 			cbEditType.FormattingEnabled = true;
-			cbEditType.Items.AddRange(new object[] { "Full-Time", "Part-Time" });
 			cbEditType.Location = new Point(127, 14);
 			cbEditType.Name = "cbEditType";
 			cbEditType.Size = new Size(242, 40);
@@ -630,7 +627,6 @@
 			// cbViewRole
 			// 
 			cbViewRole.FormattingEnabled = true;
-			cbViewRole.Items.AddRange(new object[] { "All", "Teacher", "Admin", "Student" });
 			cbViewRole.Location = new Point(967, 48);
 			cbViewRole.Name = "cbViewRole";
 			cbViewRole.Size = new Size(242, 40);

@@ -49,7 +49,19 @@ namespace appdevcw
 			dataGridView1.MultiSelect = false;
 
 			cbRole.DataSource = Enum.GetValues(typeof(RoleType));
-			cbViewRole.DataSource = Enum.GetValues(typeof(RoleType));
+			//cbViewRole.DataSource = Enum.GetValues(typeof(RoleType)); //cmt.Do i need load this line first
+			cbViewRole.Items.Clear();
+			cbViewRole.Items.Add("All");
+
+			foreach (var role in Enum.GetValues(typeof(RoleType)))
+			{
+				cbViewRole.Items.Add(role);
+			}
+
+			cbViewRole.SelectedIndex = 0;
+
+			cbType.DataSource = Enum.GetValues(typeof(EmploymentType));
+			cbEditType.DataSource = Enum.GetValues(typeof(EmploymentType));
 		}
 		private bool ValidateInputs(Control control, string message)
 		{
@@ -121,7 +133,11 @@ namespace appdevcw
 						tbSalary.Focus();
 						return;
 					}
-					if (!ValidateInputs(cbType, "Please enter admin type!")) return;
+					if (cbType.SelectedItem == null)
+					{
+						MessageBox.Show("Please select employment type!");
+						return;
+					}
 					if (!ValidateInputs(tbHours, "Please enter hours!")) return;
 					if (!int.TryParse(tbHours.Text, out int hours))
 					{
@@ -129,11 +145,7 @@ namespace appdevcw
 						return;
 					}
 
-					if (!Enum.TryParse(cbType.Text.Trim(), out EmploymentType type))
-					{
-						MessageBox.Show("Invalid employment type!");
-						return;
-					}
+					EmploymentType type = (EmploymentType)cbType.SelectedItem;
 
 					Admin a = new Admin(name, telephone, email, salary, type, hours);
 					manager.AddPerson(a);
@@ -209,7 +221,11 @@ namespace appdevcw
 			tbEditPhone.Text = row.Cells["telephone"].Value?.ToString();
 			tbEditEmail.Text = row.Cells["email"].Value?.ToString();
 
-			Enum.TryParse(row.Cells["role"].Value?.ToString(), out RoleType role);
+			if (!Enum.TryParse(row.Cells["role"].Value?.ToString(), true, out RoleType role))
+			{
+				MessageBox.Show("Invalid role!");
+				return;
+			}
 
 			if (role == RoleType.Teacher)
 			{
@@ -231,7 +247,8 @@ namespace appdevcw
 			else if (role == RoleType.Admin)
 			{
 				tbEditSalary.Text = row.Cells["salary"].Value?.ToString();
-				cbEditType.Text = row.Cells["worktype"].Value?.ToString();
+				Enum.TryParse(row.Cells["worktype"].Value?.ToString(), out EmploymentType type);
+				cbEditType.SelectedItem = type;
 				tbEditHours.Text = row.Cells["workhours"].Value?.ToString();
 			}
 
@@ -255,7 +272,11 @@ namespace appdevcw
 
 			// Get ID + Role
 			int id = Convert.ToInt32(row.Cells["id"].Value);
-			Enum.TryParse(row.Cells["role"].Value?.ToString(), out RoleType role);
+			if (!Enum.TryParse(row.Cells["role"].Value?.ToString(), true, out RoleType role))
+			{
+				MessageBox.Show("Invalid role!");
+				return;
+			}
 
 			// Confirm before delete
 			var confirm = MessageBox.Show($"Delete {role} with ID = {id}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -333,7 +354,11 @@ namespace appdevcw
 					return;
 				}
 
-				Enum.TryParse(row.Cells["role"].Value?.ToString(), out RoleType role);
+				if (!Enum.TryParse(row.Cells["role"].Value?.ToString(), true, out RoleType role))
+				{
+					MessageBox.Show("Invalid role!");
+					return;
+				}
 
 				if (role == RoleType.Teacher)
 				{
@@ -359,6 +384,12 @@ namespace appdevcw
 					if (!string.IsNullOrWhiteSpace(tbEditSub3.Text)) subjects.Add(tbEditSub3.Text);
 					//cmt.Missing logic for handling null or space values
 
+					if (subjects.Count != 3)
+					{
+						MessageBox.Show("Student must have exactly 3 subjects!");
+						return;
+					}
+
 					Student s = new Student(tbEditName.Text, tbEditPhone.Text, tbEditEmail.Text, subjects);
 
 					manager.UpdatePerson(selectedId, role, s);
@@ -377,13 +408,13 @@ namespace appdevcw
 						return;
 					}
 
-					if (!Enum.TryParse(cbEditType.Text, out EmploymentType type))
+					if (cbEditType.SelectedItem is not EmploymentType type)
 					{
-						MessageBox.Show("Invalid employment type!");
+						MessageBox.Show("Please select employment type!");
 						return;
 					}
-					Admin a = new Admin(tbEditName.Text, tbEditPhone.Text, tbEditEmail.Text, salary, type, hours);
 
+					Admin a = new Admin(tbEditName.Text, tbEditPhone.Text, tbEditEmail.Text, salary, type, hours);
 					manager.UpdatePerson(selectedId, role, a);
 				}
 
